@@ -6,6 +6,8 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 
 @SpringBootApplication
 public class AccessingDataJpaApplication {
@@ -19,43 +21,28 @@ public class AccessingDataJpaApplication {
     @Bean
     public CommandLineRunner demo(SongRepository repository) {
         return (args) -> {
-            // save a few songs
             repository.save(new Song("Happy Enough", "Tors", "Indie", 202));
             repository.save(new Song("Miracle", "Tors", "Indie", 182));
             repository.save(new Song("Stargazing", "Myles Smith", "Pop", 172));
             repository.save(new Song("Stargazing", "OneRepublic", "Rock", 271));
+            repository.save(new Song("Stick Season", "Noah Kahan", "Indie", 202));
+            repository.save(new Song("Northern Attitude", "Noah Kahan", "Indie", 182));
+            repository.save(new Song("False Confidence", "Noah Kahan", "Indie", 172));
+            repository.save(new Song("Meer", "Jeremias", "Indie", 202));
+            repository.save(new Song("Rote Flaggen", "Berq", "Indie", 182));
+            repository.save(new Song("Sailor Song", "Gigi Perez", "Indie", 172));
+            repository.save(new Song("All my Love", "Noah Kahan", "Indie", 202));
+            repository.save(new Song("Hurt Somebody", "Noah Kahan", "Indie", 182));
+            repository.save(new Song("Young Blood", "Noah Kahan", "Indie", 172));
+            repository.save(new Song("The View between Villages", "Noah Kahan", "Indie", 202));
+            repository.save(new Song("Homesick", "Noah Kahan", "Indie", 182));
+            repository.save(new Song("Home", "Matthew Hall", "Indie", 172));
 
-            // fetch all songs
-            log.info("Songs found with findAll():");
+            // Fetch all songs with pagination
+            Page<Song> allProducts = repository.findAll(PageRequest.of(0, 5));
+            log.info("Songs found with findAll(Pageable):");
             log.info("-------------------------------");
-            repository.findAll().forEach(song -> {
-                log.info(song.toString());
-            });
-            log.info("");
-
-            // fetch an individual song by ID
-            Song song = repository.findById(1);
-            log.info("Song found with findById(1):");
-            log.info("--------------------------------");
-            log.info(song.toString());
-            log.info("");
-
-            // fetch songs by title
-            log.info("Song found with findByTitle('Stargazing'):");
-            log.info("--------------------------------------------");
-            repository.findByTitle("Stargazing").forEach(title -> {
-                log.info(title.toString());
-            });
-            log.info("");
-
-            // fetch songs by artist
-            log.info("Song found with findByArtist('Tors'):");
-            log.info("--------------------------------------------");
-            repository.findByArtist("Tors").forEach(artist -> {
-                log.info(artist.toString());
-            });
-            log.info("");
+            allProducts.forEach(song -> log.info(song.toString()));
         };
     }
-
 }
