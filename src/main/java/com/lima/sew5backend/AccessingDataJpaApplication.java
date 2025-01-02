@@ -19,30 +19,54 @@ public class AccessingDataJpaApplication {
     }
 
     @Bean
-    public CommandLineRunner demo(SongRepository repository) {
+    public CommandLineRunner demo(SongRepository repository, ArtistRepository artistRepository) {
+        Artist Tors = new Artist("Tors");
+        Artist MylesSmith = new Artist("Myles Smith");
+        Artist OneRepublic = new Artist("OneRepublic");
+        Artist NoahKahan = new Artist("Noah Kahan");
+        Artist Jeremias = new Artist("Jeremias");
+        Artist Berq = new Artist("Berq");
+        Artist GigiPerez = new Artist("Gigi Perez");
+        Artist MatthewHall = new Artist("Matthew Hall");
         return (args) -> {
-            repository.save(new Song("Happy Enough", "Tors", "Indie", 202));
-            repository.save(new Song("Miracle", "Tors", "Indie", 182));
-            repository.save(new Song("Stargazing", "Myles Smith", "Pop", 172));
-            repository.save(new Song("Stargazing", "OneRepublic", "Rock", 271));
-            repository.save(new Song("Stick Season", "Noah Kahan", "Indie", 202));
-            repository.save(new Song("Northern Attitude", "Noah Kahan", "Indie", 182));
-            repository.save(new Song("False Confidence", "Noah Kahan", "Indie", 172));
-            repository.save(new Song("Meer", "Jeremias", "Indie", 202));
-            repository.save(new Song("Rote Flaggen", "Berq", "Indie", 182));
-            repository.save(new Song("Sailor Song", "Gigi Perez", "Indie", 172));
-            repository.save(new Song("All my Love", "Noah Kahan", "Indie", 202));
-            repository.save(new Song("Hurt Somebody", "Noah Kahan", "Indie", 182));
-            repository.save(new Song("Young Blood", "Noah Kahan", "Indie", 172));
-            repository.save(new Song("The View between Villages", "Noah Kahan", "Indie", 202));
-            repository.save(new Song("Homesick", "Noah Kahan", "Indie", 182));
-            repository.save(new Song("Home", "Matthew Hall", "Indie", 172));
+            //artists
+            artistRepository.save(Tors);
+            artistRepository.save(MylesSmith);
+            artistRepository.save(OneRepublic);
+            artistRepository.save(NoahKahan);
+            artistRepository.save(Jeremias);
+            artistRepository.save(Berq);
+            artistRepository.save(GigiPerez);
+            artistRepository.save(MatthewHall);
+            //songs
+            repository.save(new Song("Happy Enough", Tors, "Indie", 202));
+            repository.save(new Song("Miracle", Tors, "Indie", 182));
+            repository.save(new Song("Stargazing", MylesSmith, "Pop", 172));
+            repository.save(new Song("Stargazing", OneRepublic, "Rock", 271));
+            repository.save(new Song("Stick Season", NoahKahan, "Indie", 202));
+            repository.save(new Song("Northern Attitude", NoahKahan, "Indie", 182));
+            repository.save(new Song("False Confidence", NoahKahan, "Indie", 172));
+            repository.save(new Song("Meer", Jeremias, "Indie", 202));
+            repository.save(new Song("Rote Flaggen", Berq, "Indie", 182));
+            repository.save(new Song("Sailor Song", GigiPerez, "Indie", 172));
+            repository.save(new Song("All my Love", NoahKahan, "Indie", 202));
+            repository.save(new Song("Hurt Somebody", NoahKahan, "Indie", 182));
+            repository.save(new Song("Young Blood", NoahKahan, "Indie", 172));
+            repository.save(new Song("The View between Villages", NoahKahan, "Indie", 202));
+            repository.save(new Song("Homesick", NoahKahan, "Indie", 182));
+            repository.save(new Song("Home", MatthewHall, "Indie", 172));
 
-            // Fetch all songs with pagination
+            // Fetch all songs
             Page<Song> allProducts = repository.findAll(PageRequest.of(0, 5));
             log.info("Songs found with findAll(Pageable):");
             log.info("-------------------------------");
             allProducts.forEach(song -> log.info(song.toString()));
+
+            //Fetch all artists
+            Page<Artist> allArtists = artistRepository.findAll(PageRequest.of(0, 5));
+            log.info("Artists found with findAll(Pageable):");
+            log.info("-------------------------------");
+            allArtists.forEach(artist -> log.info(artist.toString()));
         };
     }
 }

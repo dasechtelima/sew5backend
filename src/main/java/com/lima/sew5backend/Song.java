@@ -1,9 +1,6 @@
 package com.lima.sew5backend;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 @Entity
 public class Song {
@@ -11,16 +8,35 @@ public class Song {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String title;
-    private String artist;
+    @ManyToOne
+    @JoinColumn(name = "artist_id")
+    private Artist artist;
     private String genre;
     /**
      * Length in seconds
      */
     private int length;
 
-    protected Song() {}
+    public void setArtist(Artist artist) {
+        this.artist = artist;
+    }
 
-    public Song(String title, String artist, String genre, int length) {
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public void setGenre(String genre) {
+        this.genre = genre;
+    }
+
+    public void setLength(int length) {
+        this.length = length;
+    }
+
+    protected Song() {
+    }
+
+    public Song(String title, Artist artist, String genre, int length) {
         this.title = title;
         this.artist = artist;
         this.genre = genre;
@@ -31,7 +47,7 @@ public class Song {
     public String toString() {
         return String.format(
                 "Song[id=%d, title='%s', artist='%s', genre='%s', length=%d]",
-                id, title, artist, genre, length);
+                id, title, artist.getName(), genre, length);
     }
 
     public Long getId() {
@@ -42,7 +58,7 @@ public class Song {
         return title;
     }
 
-    public String getArtist() {
+    public Artist getArtist() {
         return artist;
     }
 
