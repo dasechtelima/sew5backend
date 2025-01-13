@@ -16,6 +16,11 @@ public class Song {
      * Length in seconds
      */
     private int length;
+    /**
+     * Music File
+     */
+    @Column(columnDefinition="LONGVARCHAR")
+    private String file;
 
     public void setArtist(Artist artist) {
         this.artist = artist;
@@ -33,21 +38,26 @@ public class Song {
         this.length = length;
     }
 
+    public void setFile(String file) {
+        this.file = file;
+    }
+
     protected Song() {
     }
 
-    public Song(String title, Artist artist, String genre, int length) {
+    public Song(String title, Artist artist, String genre, int length, String file) {
         this.title = title;
         this.artist = artist;
         this.genre = genre;
         this.length = length;
+        this.file = file;
     }
 
     @Override
     public String toString() {
         return String.format(
-                "Song[id=%d, title='%s', artist='%s', genre='%s', length=%d]",
-                id, title, artist.getName(), genre, length);
+                "Song[id=%d, title='%s', artist='%s', genre='%s', length=%d, file='%s']",
+                id, title, artist.getName(), genre, length, file);
     }
 
     public Long getId() {
@@ -68,5 +78,9 @@ public class Song {
 
     public int getLength() {
         return length;
+    }
+
+    public String getFile() {
+        return file;
     }
 }

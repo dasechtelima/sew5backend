@@ -27,3 +27,8 @@ interface SongProjection {
     String getGenre();
     int getLength();
 }
+
+@Projection(name = "songFile", types = {Song.class})
+interface SongFileProjection {
+    String getFile();
+}

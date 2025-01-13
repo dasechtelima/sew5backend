@@ -39,22 +39,22 @@ public class AccessingDataJpaApplication {
             artistRepository.save(GigiPerez);
             artistRepository.save(MatthewHall);
             //songs
-            repository.save(new Song("Happy Enough", Tors, "Indie", 202));
-            repository.save(new Song("Miracle", Tors, "Indie", 182));
-            repository.save(new Song("Stargazing", MylesSmith, "Pop", 172));
-            repository.save(new Song("Stargazing", OneRepublic, "Rock", 271));
-            repository.save(new Song("Stick Season", NoahKahan, "Indie", 202));
-            repository.save(new Song("Northern Attitude", NoahKahan, "Indie", 182));
-            repository.save(new Song("False Confidence", NoahKahan, "Indie", 172));
-            repository.save(new Song("Meer", Jeremias, "Indie", 202));
-            repository.save(new Song("Rote Flaggen", Berq, "Indie", 182));
-            repository.save(new Song("Sailor Song", GigiPerez, "Indie", 172));
-            repository.save(new Song("All my Love", NoahKahan, "Indie", 202));
-            repository.save(new Song("Hurt Somebody", NoahKahan, "Indie", 182));
-            repository.save(new Song("Young Blood", NoahKahan, "Indie", 172));
-            repository.save(new Song("The View between Villages", NoahKahan, "Indie", 202));
-            repository.save(new Song("Homesick", NoahKahan, "Indie", 182));
-            repository.save(new Song("Home", MatthewHall, "Indie", 172));
+            repository.save(new Song("Happy Enough", Tors, "Indie", 202, ""));
+            repository.save(new Song("Miracle", Tors, "Indie", 182, ""));
+            repository.save(new Song("Stargazing", MylesSmith, "Pop", 172, ""));
+            repository.save(new Song("Stargazing", OneRepublic, "Rock", 271, ""));
+            repository.save(new Song("Stick Season", NoahKahan, "Indie", 202, ""));
+            repository.save(new Song("Northern Attitude", NoahKahan, "Indie", 182, ""));
+            repository.save(new Song("False Confidence", NoahKahan, "Indie", 172, ""));
+            repository.save(new Song("Meer", Jeremias, "Indie", 202, ""));
+            repository.save(new Song("Rote Flaggen", Berq, "Indie", 182, ""));
+            repository.save(new Song("Sailor Song", GigiPerez, "Indie", 172, ""));
+            repository.save(new Song("All my Love", NoahKahan, "Indie", 202, ""));
+            repository.save(new Song("Hurt Somebody", NoahKahan, "Indie", 182, ""));
+            repository.save(new Song("Young Blood", NoahKahan, "Indie", 172, ""));
+            repository.save(new Song("The View between Villages", NoahKahan, "Indie", 202, ""));
+            repository.save(new Song("Homesick", NoahKahan, "Indie", 182, ""));
+            repository.save(new Song("Home", MatthewHall, "Indie", 172, ""));
 
             // Fetch all songs
             Page<Song> allProducts = repository.findAll(PageRequest.of(0, 5));
