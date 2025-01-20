@@ -19,8 +19,13 @@ public class Song {
     /**
      * Music File
      */
-    @Column(columnDefinition="LONGVARCHAR")
+    @Column(columnDefinition = "LONGVARCHAR")
     private String file;
+    /**
+     * Backend Version
+     */
+    @Version
+    private int version;
 
     public void setArtist(Artist artist) {
         this.artist = artist;
@@ -40,6 +45,10 @@ public class Song {
 
     public void setFile(String file) {
         this.file = file;
+    }
+
+    public void setVersion(int version) {
+        this.version = version;
     }
 
     protected Song() {
@@ -82,5 +91,9 @@ public class Song {
 
     public String getFile() {
         return file;
+    }
+
+    public int getVersion() {
+        return version;
     }
 }
