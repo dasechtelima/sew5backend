@@ -16,8 +16,8 @@ import java.util.List;
 public interface SongRepository extends PagingAndSortingRepository<Song, Long>, CrudRepository<Song, Long> {
 
     @CrossOrigin
-    @RestResource(path = "findByTitleIgnoreCaseContainingOrArtistIgnoreCaseContaining", rel = "findByTitleIgnoreCaseContainingOrArtistIgnoreCaseContaining")
-    List<Song> findByTitleIgnoreCaseContainingOrArtistName(String title, String artist_name);
+    @RestResource(path = "findByTitleIgnoreCaseContainingOrArtistIgnoreCaseContainingOrGenreIgnoreCaseContaining", rel = "findByTitleIgnoreCaseContainingOrArtistIgnoreCaseContainingOrGenreIgnoreCaseContaining")
+    List<Song> findByTitleIgnoreCaseContainingOrArtistNameOrGenre(String title, String artist_name, String genre);
 }
 
 @Projection(name = "songWithArtist", types = {Song.class})
