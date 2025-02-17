@@ -2,14 +2,21 @@ package com.lima.sew5backend;
 
 import jakarta.persistence.*;
 
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
+
 @Entity
 public class Song {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    @NotBlank
+    @Size(min = 2, message = "Title should have atleast 2 characters")
     private String title;
     @ManyToOne
     @JoinColumn(name = "artist_id")
+    @NotNull(message = "Artist is mandatory")
     private Artist artist;
     private String genre;
     /**
