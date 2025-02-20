@@ -6,6 +6,11 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
 @Entity
 public class Song {
     @Id
@@ -18,7 +23,11 @@ public class Song {
     @JoinColumn(name = "artist_id")
     @NotNull(message = "Artist is mandatory")
     private Artist artist;
-    private String genre;
+
+    @ElementCollection
+    @CollectionTable(name = "song_genre", joinColumns = @JoinColumn(name = "song_id"))
+    private Set<Genre> genre = new HashSet<>();
+
     /**
      * Length in seconds
      */
@@ -42,7 +51,7 @@ public class Song {
         this.title = title;
     }
 
-    public void setGenre(String genre) {
+    public void setGenre(Set<Genre> genre) {
         this.genre = genre;
     }
 
@@ -61,7 +70,7 @@ public class Song {
     protected Song() {
     }
 
-    public Song(String title, Artist artist, String genre, int length, String file) {
+    public Song(String title, Artist artist, Set<Genre> genre, int length, String file) {
         this.title = title;
         this.artist = artist;
         this.genre = genre;
@@ -88,7 +97,7 @@ public class Song {
         return artist;
     }
 
-    public String getGenre() {
+    public Set<Genre> getGenre() {
         return genre;
     }
 
