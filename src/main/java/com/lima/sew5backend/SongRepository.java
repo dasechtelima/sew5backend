@@ -1,5 +1,7 @@
 package com.lima.sew5backend;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.PagingAndSortingRepository;
@@ -19,7 +21,7 @@ public interface SongRepository extends PagingAndSortingRepository<Song, Long>, 
     @CrossOrigin
     @RestResource(path = "searchSongs", rel = "searchSongs")
     @Query("SELECT s FROM Song s JOIN s.artist a JOIN s.genre g WHERE LOWER(s.title) LIKE LOWER(CONCAT('%', :title, '%')) OR LOWER(a.name) LIKE LOWER(CONCAT('%', :artist_name, '%')) OR LOWER(g.name) LIKE LOWER(CONCAT('%', :genre_name, '%'))")
-    List<Song> findSongsByTitleContainingIgnoreCaseOrArtistNameContainingIgnoreCaseOrGenreNameContainingIgnoreCase(@Param("title") String title, @Param("artist_name") String artist_name, @Param("genre_name") String genre_name);
+    Page<Song> findSongsByTitleContainingIgnoreCaseOrArtistNameContainingIgnoreCaseOrGenreNameContainingIgnoreCase(@Param("title") String title, @Param("artist_name") String artist_name, @Param("genre_name") String genre_name, Pageable pageable);
 }
 
 @Projection(name = "songWithArtist", types = {Song.class})
